@@ -1,17 +1,24 @@
-def sum_digits(number: int) -> int:
-    number = abs(number)
-    total = 0
-    while number > 0:
-        digit = number % 10
-        total += digit
-        number //= 10
-    return total
-def average(numbers: list) -> float | None:
+from functions import*
 
-    if not numbers:
-        return None
-    return sum(numbers) / len(numbers)
-def normalize_text(text: str) -> str:
-    text = text.lower()
-    words = text.split()
-    return " ".join(words)
+def main():
+    number=int(input('Введите целое число: '))
+    print('Сумма цифр:', sum_digits(number))
+
+    numbers_text=input('Введите целые числа через пробел: ')
+    numbers=[]
+    for item in numbers_text.split():
+        numbers.append(int(item))
+    result = average(numbers)
+    if result is None:
+        print('Нет данных')
+    else:
+        print('Среднее:', result)
+    text = input('Введите текст: ')
+    print('Нормализованный текст:', normalize_text(text))
+    threshold = int(input('Введите неотрицательный порог: '))
+    if threshold < 0:
+        print('Порог не может быть отрицательным')
+        return
+    print('Числа больше порога:', select_numbers(numbers, threshold))
+if __name__=='__main__':
+    main()
